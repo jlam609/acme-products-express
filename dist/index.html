@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./main.js" defer></script>
+    <title>Document</title>
+</head>
+<style>
+    #app{
+        display: flex;
+        flex-direction: column;
+    }
+    .tabs{
+        display: flex;
+        flex-direction: row;
+    }
+    .tabs > * {
+        border:solid 1px black;
+        padding: 10px;
+        margin-right: 10px;
+    }
+    .products{
+        text-align: center;
+        margin-top: 20px;
+    }
+    .list > *{
+        list-style: none;
+        border: black solid 1px;
+        padding:10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+</style>
+<body>
+    <div id='app'></div>
+</body>
+</html>

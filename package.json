@@ -1,0 +1,42 @@
+{
+  "name": "acme-products-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpackconfig.js",
+  "scripts": {
+    "build": "webpack --mode=\"production\"",
+    "build:watch": "webpack --watch",
+    "start": "node server/server.js",
+    "start:dev":"node-dev --respawn server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlam609/acme-products-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlam609/acme-products-express/issues"
+  },
+  "homepage": "https://github.com/jlam609/acme-products-express#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  }
+}
