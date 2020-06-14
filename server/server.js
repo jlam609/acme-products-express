@@ -43,14 +43,12 @@ app.get('/api/products', (req,res)=>{
 })
 app.delete('/api/products/:name', (req,res)=>{
     const {name} = req.params
-    console.log(name, req.products)
     for (let i = 0; i < req.products.length; i++){
         if (req.products[i].name === name) {
             delete req.products[i]
             req.products = req.products.filter(elem => elem !== null)
-            return writeFileP(DB_Path, req.products)
-            .then(() => {
-                return res.send({
+            return writeFileP(DB_Path, req.products).then(() => {
+                    res.send({
                     message:`Product ${name} has been removed`
                 }) 
             })
@@ -60,6 +58,22 @@ app.delete('/api/products/:name', (req,res)=>{
     return res.status(400).send({
         message:`Product ${name} does not exist`
     })
+})
+app.post('/api/products', (req,res) => {
+    let filtered = req.products.filter(product => product.name === req.body.name)
+    if (req.body && typeof req.body.name == 'string' && !filtered.length){
+    req.products.push(req.body)
+    writeFileP(DB_Path, req.products)
+    .then(() => {
+        res.send({
+            message:`Product ${req.body.name} has been added`
+        })
+    })
+    .catch(e => console.error(e))
+}
+    else{
+        res.status(400).send('Must be a unique string')
+    }
 })
 app.use((req,res,next) => {
     res.send({

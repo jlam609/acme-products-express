@@ -22,6 +22,8 @@ class Products extends Component {
             <li key = {product.name}>{product.name} <button onClick = {(e) => {
                 e.preventDefault()
                 axios.delete(`/api/products/${product.name}`)
+                .then(() => console.log(`Product ${product.name} has been removed`))
+                .catch(e => console.error(e))
             }}>Remove</button> </li>
             )
           })}
@@ -29,6 +31,39 @@ class Products extends Component {
       </div>
     );
   }
+}
+class Create extends Component {
+    constructor(){
+    super()
+    this.state = {
+    input:''
+    }
+    this.add = this.add.bind(this)
+    }   
+    add = (e) => {
+        e.preventDefault()
+        this.setState({
+            input:e.target.value
+        })
+    }
+    post = (e, input) => {
+        e.preventDefault()
+        axios.post('/api/products', {"name":input})
+        .then(() => console.log('Successfully posted'))
+        .catch(e => console.error(e))
+    }
+    render(){
+        const {input} = this.state
+        return(
+            <div>
+                <h1>Create a Product</h1>
+                <div className = {'createBar'}>
+                <input onChange={(e)=>this.add(e)}></input>
+                <button onClick={(e)=> this.post(e, input)}>Save</button>
+                </div>
+            </div>
+        )
+    }
 }
 class App extends Component {
   state = {
@@ -57,10 +92,13 @@ class App extends Component {
             <Link to="/products/create">Create a Product</Link>
           </nav>
           <Switch>
-            <Route path={"/home"}>
+            <Route path="/home">
               <Home />
             </Route>
-            <Route path={"/products"}>
+            <Route path="/products/create">
+                <Create />
+            </Route>
+            <Route exact={true} path="/products">
               <Products products={products} />
             </Route>
           </Switch>

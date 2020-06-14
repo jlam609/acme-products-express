@@ -34944,7 +34944,11 @@ var Products = /*#__PURE__*/function (_Component2) {
         }, product.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
           onClick: function onClick(e) {
             e.preventDefault();
-            axios__WEBPACK_IMPORTED_MODULE_10___default.a.delete("/api/products/".concat(product.name));
+            axios__WEBPACK_IMPORTED_MODULE_10___default.a.delete("/api/products/".concat(product.name)).then(function () {
+              return console.log("Product ".concat(product.name, " has been removed"));
+            }).catch(function (e) {
+              return console.error(e);
+            });
           }
         }, "Remove"), " ");
       })));
@@ -34954,13 +34958,74 @@ var Products = /*#__PURE__*/function (_Component2) {
   return Products;
 }(react__WEBPACK_IMPORTED_MODULE_7__["Component"]);
 
-var App = /*#__PURE__*/function (_Component3) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(App, _Component3);
+var Create = /*#__PURE__*/function (_Component3) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(Create, _Component3);
 
-  var _super3 = _createSuper(App);
+  var _super3 = _createSuper(Create);
+
+  function Create() {
+    var _this;
+
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, Create);
+
+    _this = _super3.call(this);
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "add", function (e) {
+      e.preventDefault();
+
+      _this.setState({
+        input: e.target.value
+      });
+    });
+
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "post", function (e, input) {
+      e.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('/api/products', {
+        "name": input
+      }).then(function () {
+        return console.log('Successfully posted');
+      }).catch(function (e) {
+        return console.error(e);
+      });
+    });
+
+    _this.state = {
+      input: ''
+    };
+    _this.add = _this.add.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this));
+    return _this;
+  }
+
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(Create, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var input = this.state.input;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("h1", null, "Create a Product"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: 'createBar'
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
+        onChange: function onChange(e) {
+          return _this2.add(e);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+        onClick: function onClick(e) {
+          return _this2.post(e, input);
+        }
+      }, "Save")));
+    }
+  }]);
+
+  return Create;
+}(react__WEBPACK_IMPORTED_MODULE_7__["Component"]);
+
+var App = /*#__PURE__*/function (_Component4) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_4___default()(App, _Component4);
+
+  var _super4 = _createSuper(App);
 
   function App() {
-    var _this;
+    var _this3;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, App);
 
@@ -34968,23 +35033,23 @@ var App = /*#__PURE__*/function (_Component3) {
       args[_key] = arguments[_key];
     }
 
-    _this = _super3.call.apply(_super3, [this].concat(args));
+    _this3 = _super4.call.apply(_super4, [this].concat(args));
 
-    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this), "state", {
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_0___default()(_this3), "state", {
       products: [],
       loading: true
     });
 
-    return _this;
+    return _this3;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_10___default.a.get("/api/products").then(function (res) {
-        _this2.setState({
+        _this4.setState({
           products: res.data.products,
           loading: false
         });
@@ -35009,6 +35074,9 @@ var App = /*#__PURE__*/function (_Component3) {
       }, "Create a Product")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
         path: "/home"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(Home, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+        path: "/products/create"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(Create, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
+        exact: true,
         path: "/products"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(Products, {
         products: products

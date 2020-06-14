@@ -7,7 +7,7 @@
     "build": "webpack --mode=\"production\"",
     "build:watch": "webpack --watch",
     "start": "node server/server.js",
-    "start:dev":"node-dev --respawn server/server.js"
+    "start:dev": "node-dev --respawn server/server.js"
   },
   "repository": {
     "type": "git",
