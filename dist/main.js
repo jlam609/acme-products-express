@@ -34944,8 +34944,8 @@ var Products = /*#__PURE__*/function (_Component2) {
         }, product.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
           onClick: function onClick(e) {
             e.preventDefault();
-            axios__WEBPACK_IMPORTED_MODULE_10___default.a.delete("/api/products/".concat(product.name)).then(function () {
-              return console.log("Product ".concat(product.name, " has been removed"));
+            axios__WEBPACK_IMPORTED_MODULE_10___default.a.delete("/api/products/".concat(product.name)).then(function (res) {
+              return console.log(res.data.message);
             }).catch(function (e) {
               return console.error(e);
             });

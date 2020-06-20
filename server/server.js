@@ -2,6 +2,7 @@ const chalk = require('chalk')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+const port = process.env.PORT || 3000
 
 const app = express()
 const readFileP = (path) => {
@@ -86,4 +87,4 @@ app.use((err,req,res,next) => {
         error:err.message,
     })
 })
-app.listen(3000, () => console.log(chalk.green('listening')))
+app.listen(port, () => console.log(chalk.green('listening')))

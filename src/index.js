@@ -22,7 +22,7 @@ class Products extends Component {
             <li key = {product.name}>{product.name} <button onClick = {(e) => {
                 e.preventDefault()
                 axios.delete(`/api/products/${product.name}`)
-                .then(() => console.log(`Product ${product.name} has been removed`))
+                .then((res) => console.log(res.data.message))
                 .catch(e => console.error(e))
             }}>Remove</button> </li>
             )
@@ -49,7 +49,7 @@ class Create extends Component {
     post = (e, input) => {
         e.preventDefault()
         axios.post('/api/products', {"name":input})
-        .then(() => console.log('Successfully posted'))
+        .then((res) => console.log(res.data.message))
         .catch(e => console.error(e))
     }
     render(){
